@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+MENU = {
+  "Apple Pie"        => { verb: "ate", price: "1.50", bonus: "Toughness +1, Stamina +8" },
+  "Cheese Merv"      => { verb: "ate", price: "2.20", bonus: "Agility +1, Stamina +8" },
+  "Chicken Sandwich" => { verb: "ate", price: "2.50", bonus: "Stamina +28" },
+  "Iced Tea"         => { verb: "drank", price: "1.50", bonus: "Willpower +10, Stamina +1" },
+  "Merv Dog"         => { verb: "ate", price: "2.00", bonus: "Toughness +1, Stamina +12" },
+  "Merv Burger"      => { verb: "ate", price: "2.10", bonus: "Stamina +24" },
+  "Merv Fries"       => { verb: "ate", price: "2.20", bonus: "Jump +1, Stamina +12" },
+  "Merv Malt"        => { verb: "drank", price: "2.20", bonus: "Defense +1, Stamina +12" },
+  "Milk"             => { verb: "drank", price: "1.20", bonus: "Stamina +12" },
+  "Mondo Merv"       => { verb: "ate", price: "4.00", bonus: "Defense +1, Jump +1, Stamina +20" },
+  "Soda"             => { verb: "drank", price: "2.00", bonus: "Agility +1" },
+  "Souper Merv"      => { verb: "ate", price: "1.50", bonus: "Stamina +16" },
+  "Spicy Chili"      => { verb: "ate", price: "3.00", bonus: "Weapon +1, Stamina +10" }
+}
+
+MENU.each do |item, o|
+  q = item.split(/" "/)
+
+  search(q) do |tweet|
+    p tweet
+    reply("@#{tweet_user(tweet)} #{o[:verb]} the #{item}. #{o[:bonus]}", tweet)
+  end
+
+  update_config
+
+  sleep(60 * 5)
+end
